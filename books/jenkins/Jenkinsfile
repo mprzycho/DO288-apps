@@ -119,12 +119,13 @@ pipeline {
                         oc delete all -l app=${APP_NAME}
                         sleep 5
                    '''
-
+sh '''
                 echo '### Creating a new app in Staging ###'
 		oc project ${STAGE_PROJECT}
-		oc new-app --name ${APP_NAME} --as-deployment-config -i books:stage 
+		oc new-app --name books --as-deployment-config -i books:stage
 		oc expose svc ${APP_NAME}
-            }
+'''      
+      }
         }
 
         stage('Wait for deployment in Staging') {
