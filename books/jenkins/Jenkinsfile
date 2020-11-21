@@ -60,7 +60,7 @@ pipeline {
                 echo '### Creating a new app in DEV env ###'
 		sh '''
 		  oc new-app --name ${APP_NAME} nodejs:12~https://github.com/mprzycho/DO288-apps --as-deployment-config --context-dir ${APP_NAME} --build-env npm_config_registry=${NEXUS_SERVER}
-		  oc expose svc /${APP_NAME}
+		  oc expose svc/${APP_NAME}
 		'''
             }
         }
