@@ -91,7 +91,8 @@ sh """
         }
 
         stage('Wait for deployment in DEV env') {
-	script {
+	steps { 
+	  script {
 		openshift.withCluster(){
 			openshift.withProject("${DEV_PROJECT}") {
 			  openshift.selector("dc", "${APP_NAME}").related("pods").untilEach(1){
@@ -99,7 +100,8 @@ sh """
 			  }
 			}
 		}
-}        
+	  }       
+	}	 
 }
 
         stage('Promote to Staging Env') {
